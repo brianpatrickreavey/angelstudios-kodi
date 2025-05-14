@@ -22,13 +22,8 @@ runtime for addons. For older versions see "matrix" and "python2" branches.
 
 
 # How to create the zip
-TODO: Should prbably cut out all the test files first - make them dump to a log directory that gets excluded in the zip.
-```
-zip -r plugin.video.tuttletwins-0.1.4.zip plugin.video.tuttletwins/
-cp to NFS server
-install from ZIP on Kodi
-```
+run the `package.sh` script to create the zip file of `plugin.video.angelstudios` in `dist`
 
 # Where is the log?
-/home/pwreavey/.kodi/temp/kodi.log
+${HOME}/.kodi/temp/kodi.log
 
