@@ -15,7 +15,7 @@ jobs:
 
       - name: Run the packager
         run: |
-          build.sh
+          /bin/bash build.sh
           # Assuming build.sh creates a zip file named project.zip
 
       - name: Publish to GitHub Pages
