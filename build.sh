@@ -54,3 +54,5 @@ cat >> gh-pages/index.html <<EOF
 </body>
 </html>
 EOF
+
+cat gh-pages/index.html
