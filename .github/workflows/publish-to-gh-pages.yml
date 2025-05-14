@@ -27,3 +27,10 @@ jobs:
         with:
           name: plugin-video-angelstudios
           path: dist/plugin.video.angelstudios-${{ env.VERSION }}.zip
+      
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
