@@ -20,14 +20,7 @@ jobs:
       - name: Run the packager
         run: |
           /bin/bash build.sh
-          # build.sh should create dist/plugin.video.angelstudios-${VERSION}.zip
-
-      - name: Prepare gh-pages directory
-        run: |
-          mkdir -p gh-pages
-          cp dist/plugin.video.angelstudios-${{ env.VERSION }}.zip gh-pages/
-          # If you have an index.html, copy it too:
-          # cp dist/index.html gh-pages/
+          # build.sh should create gh-pages/plugin.video.angelstudios-${VERSION}.zip
 
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
