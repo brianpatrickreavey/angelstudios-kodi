@@ -5,8 +5,8 @@
 # Usage: ./build.sh
 
 # Check if the dist directory exists, if not create it
-if [ ! -d "dist" ]; then
-  mkdir dist
+if [ ! -d "gh-pages" ]; then
+  mkdir gh-pages
 fi
 
 # Check if the version file exists, if not create it
@@ -20,4 +20,4 @@ VERSION=$(cat version.txt)
 sed -i "/plugin.video.angelstudios/ s/\(version=\"\)[^\"]*\(\"\)/\1$VERSION\2/" plugin.video.angelstudios/addon.xml
 
 # Create a zipfile of the project
-zip -r "gh-pages/plugin.video.angelstudios-$VERSION.zip" plugin.video.angelstudios -x "*.git*" "dist/*" "package.sh" "version.txt"
+zip -r "dist/plugin.video.angelstudios-$VERSION.zip" plugin.video.angelstudios -x "*.git*" "dist/*" "package.sh" "version.txt"

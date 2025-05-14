@@ -20,14 +20,15 @@ jobs:
       - name: Run the packager
         run: |
           /bin/bash build.sh
-          # build.sh should create dist/plugin.video.angelstudios-VERSION.zip
+          # build.sh should create dist/plugin.video.angelstudios-${VERSION}.zip
 
-      - name: Upload ZIP artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: plugin-video-angelstudios
-          path: gh-pages/plugin.video.angelstudios-${{ env.VERSION }}.zip
-      
+      - name: Prepare gh-pages directory
+        run: |
+          mkdir -p gh-pages
+          cp dist/plugin.video.angelstudios-${{ env.VERSION }}.zip gh-pages/
+          # If you have an index.html, copy it too:
+          # cp dist/index.html gh-pages/
+
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
