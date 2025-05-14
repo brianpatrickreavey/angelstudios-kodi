@@ -1,4 +1,4 @@
-name: Publish ZIP to GitHub Pages
+name: Build and Upload ZIP Artifact
 
 on:
   push:
@@ -6,27 +6,24 @@ on:
       - main
 
 jobs:
-  build-and-publish:
+  build-and-upload:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Get version
+        id: get_version
+        run: echo "VERSION=$(cat version.txt)" >> $GITHUB_ENV
+
       - name: Run the packager
         run: |
           /bin/bash build.sh
-          # Assuming build.sh creates a zip file named project.zip
+          # build.sh should create dist/plugin.video.angelstudios-VERSION.zip
 
-      - name: Publish to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload ZIP artifact
+        uses: actions/upload-artifact@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/
-          publish_branch: gh-pages
-          keep_files: true
-          # Only publish the zip file
-          exclude_assets: |
-            *
-          include_assets: |
-            dist/plugin.video.angelstudios-$(cat version.txt).zip
+          name: plugin-video-angelstudios
+          path: dist/plugin.video.angelstudios-${{ env.VERSION }}.zip
