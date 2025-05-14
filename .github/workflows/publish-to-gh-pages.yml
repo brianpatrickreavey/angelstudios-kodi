@@ -17,6 +17,12 @@ jobs:
         id: get_version
         run: echo "VERSION=$(cat version.txt)" >> $GITHUB_ENV
 
+      - name: Checkout gh-pages branch into gh-pages directory
+        run: |
+          git fetch origin gh-pages:gh-pages || true
+          rm -rf gh-pages
+          git clone --branch gh-pages --single-branch --depth 1 "https://github.com/${GITHUB_REPOSITORY}.git" gh-pages || mkdir gh-pages
+
       - name: Run the packager
         run: |
           /bin/bash build.sh
