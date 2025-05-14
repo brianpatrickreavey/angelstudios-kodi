@@ -1,0 +1,32 @@
+name: Publish ZIP to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run the packager
+        run: |
+          build.sh
+          # Assuming build.sh creates a zip file named project.zip
+
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist/
+          publish_branch: gh-pages
+          keep_files: true
+          # Only publish the zip file
+          exclude_assets: |
+            *
+          include_assets: |
+            dist/plugin.video.angelstudios-$(cat version.txt).zip
