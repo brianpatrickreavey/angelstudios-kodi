@@ -17,6 +17,17 @@ jobs:
         id: get_version
         run: echo "VERSION=$(cat version.txt)" >> $GITHUB_ENV
 
+      - name: Checkout file from another repo
+        uses: actions/checkout@v4
+        with:
+          repository: jurialmunkey/repository.jurialmunkey
+          ref: main
+          path: repository.jurialmunkey
+
+      - name: Copy needed file
+        run: cp repository.jurialmunkey/path/to/file.txt ./desired/location/
+
+      # TODO This would be better to pull from deployment artifacts
       - name: Checkout gh-pages branch into gh-pages directory
         run: |
           git fetch origin gh-pages:gh-pages || true

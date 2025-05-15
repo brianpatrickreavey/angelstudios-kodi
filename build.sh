@@ -9,19 +9,15 @@ if [ ! -d "gh-pages" ]; then
   mkdir gh-pages
 fi
 
-# Check if the version file exists, if not create it
-if [ ! -f "version.txt" ]; then
-  echo "0.0.1" > version.txt
-fi
+# Create the zipfiles of the projects
+python _repo_generator.py
 
-# Read the version from the version file
-VERSION=$(cat version.txt)
-# Update the addon.xml file with the current version
-sed -i "/plugin.video.angelstudios/ s/\(version=\"\)[^\"]*\(\"\)/\1$VERSION\2/" plugin.video.angelstudios/addon.xml
-
-# Create a zipfile of the project
-zip -r "gh-pages/plugin.video.angelstudios-$VERSION.zip" plugin.video.angelstudios -x "*.git*" "dist/*" "package.sh" "version.txt"
-
+# Copy the zipfiles to the gh-pages directory
+for zipfile in $(find repo/zips/ -name *.zip); do
+  echo $zipfile
+  fname=$(basename "$zipfile")
+  cp ${zipfile} "gh-pages/${fname}"
+done
 
 cat > gh-pages/index.html <<EOF
 <!DOCTYPE html>
@@ -54,5 +50,3 @@ cat >> gh-pages/index.html <<EOF
 </body>
 </html>
 EOF
-
-cat gh-pages/index.html
