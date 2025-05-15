@@ -17,7 +17,7 @@ jobs:
         id: get_version
         run: echo "VERSION=$(cat version.txt)" >> $GITHUB_ENV
 
-      - name: Checkout file from another repo
+      - name: Checkout KODI Repo Generator
         uses: actions/checkout@v4
         with:
           repository: jurialmunkey/repository.jurialmunkey
@@ -25,7 +25,7 @@ jobs:
           path: repository.jurialmunkey
 
       - name: Copy needed file
-        run: cp repository.jurialmunkey/path/to/file.txt ./desired/location/
+        run: cp repository.jurialmunkey/_repo_generator.py ./
 
       # TODO This would be better to pull from deployment artifacts
       - name: Checkout gh-pages branch into gh-pages directory
