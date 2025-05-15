@@ -20,12 +20,12 @@ jobs:
       - name: Checkout KODI Repo Generator
         uses: actions/checkout@v4
         with:
-          repository: jurialmunkey/repository.jurialmunkey
-          ref: main
-          path: repository.jurialmunkey
+          repository: drinfernoo/repository.example
+          ref: master
+          path: repository.example
 
       - name: Copy needed file
-        run: cp repository.jurialmunkey/_repo_generator.py ./
+        run: cp repository.example/_repo_generator.py ./
 
       # TODO This would be better to pull from deployment artifacts
       - name: Checkout gh-pages branch into gh-pages directory
