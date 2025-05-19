@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # This script is used to build the package for the project.
-# It will create a tarball of the project and place it in the dist directory.
+# It will create a tarball of the project and place it in the `gh-pages` directory.
 # Usage: ./build.sh
 
 # Check if the dist directory exists, if not create it

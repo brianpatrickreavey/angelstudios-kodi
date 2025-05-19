@@ -19,11 +19,11 @@ import os
 import sys
 from urllib.parse import urlencode, parse_qsl
 
-import xbmc
-import xbmcgui
-import xbmcplugin
-from xbmcaddon import Addon
-from xbmcvfs import translatePath
+import xbmc # type: ignore
+import xbmcgui # type: ignore
+import xbmcplugin # type: ignore
+from xbmcaddon import Addon # type: ignore
+from xbmcvfs import translatePath # type: ignore
 
 import requests
 import bs4
