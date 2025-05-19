@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon id="repository.brianpatrickreavey.githuib.com" name="Brian Reavey's Repository" version="0.0.1" provider-name="Brian Reavey">
+    <extension point="xbmc.addon.repository" name="Brian Reavey's Repository">
+        <info>https://chad.parry.org/angelstudios-kodi/addons.xml</info>
+        <checksum>https://chad.parry.org/software/kodi/addons.xml.gz.md5</checksum>
+        <datadir zip="true">https://chad.parry.org/software/kodi</datadir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Chad Parry's Repository</summary>
+        <description>A repository of add-ons that Chad Parry developed for a personal Kodi system</description>
+        <disclaimer></disclaimer>
+        <news>3.1.0
+- Upgrade to TLS</news>
+        <platform>all</platform>
+        <language></language>
+        <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
+        <forum></forum>
+        <website></website>
+        <source>https://github.com/chadparry/kodi-repository.chad.parry.org</source>
+        <email>github at chad dot parry dot org</email>
+    </extension>
+</addon>
+
+
+MAKE THIS ITS OWN REPO - BRING IN OTHER REPOS AS NECESSARY - HOW TO REBUILD REPO THOUGH?
+mybe we just rename this repo to be more generic.  also, how to get my username out of it?

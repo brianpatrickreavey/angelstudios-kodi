@@ -20,12 +20,12 @@ jobs:
       - name: Checkout KODI Repo Generator
         uses: actions/checkout@v4
         with:
-          repository: drinfernoo/repository.example
+          repository: chadparry/kodi-repository.chad.parry.org
           ref: master
-          path: repository.example
+          path: kodi-repository
 
       - name: Copy needed file
-        run: cp repository.example/_repo_generator.py ./
+        run: cp kodi-repository/tools/create_repository.py ./
 
       # TODO This would be better to pull from deployment artifacts
       - name: Checkout gh-pages branch into gh-pages directory

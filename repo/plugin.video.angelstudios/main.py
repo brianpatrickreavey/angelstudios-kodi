@@ -39,10 +39,10 @@ ICONS_DIR = os.path.join(ADDON_PATH, 'resources', 'images', 'icons')
 FANART_DIR = os.path.join(ADDON_PATH, 'resources', 'images', 'fanart')
 POSTER_DIR = os.path.join(ADDON_PATH, 'resources', 'images', 'posters')
 
-url="https://www.angel.com/watch/tuttle-twins/"
-response = requests.get(url)
-soup = bs4.BeautifulSoup(response.content, 'html.parser')
-raw_data = json.loads(soup.find(id="__NEXT_DATA__").string)
+# url="https://www.angel.com/watch/tuttle-twins/"
+# response = requests.get(url)
+# soup = bs4.BeautifulSoup(response.content, 'html.parser')
+# raw_data = json.loads(soup.find(id="__NEXT_DATA__").string)
 
 
 'We need: Login, and Whole Site'

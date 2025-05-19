@@ -10,7 +10,9 @@ if [ ! -d "gh-pages" ]; then
 fi
 
 # Create the zipfiles of the projects
-python _repo_generator.py
+python create_repository.py \
+  --data_dir gh-pages \
+  repo/plugin*
 
 # Copy the zipfiles to the gh-pages directory
 for zipfile in $(find repo/zips/ -name *.zip); do
