@@ -166,9 +166,7 @@ def get_seasons(project_url):
     response = requests.get(project_url)
     soup = bs4.BeautifulSoup(response.content, 'html.parser')
     show_data = json.loads(soup.find(id="__NEXT_DATA__").string)
-    # write out the json data to a file
-    with open('tests/data/mock_seasons.json', 'w') as f:
-        json.dump(show_data, f, indent=2)
+
     seasons = []
     for raw_season in show_data['props']['pageProps']['projectData']['seasons']:
         # if show_data['props']['pageProps']['catalogTitle'] == None:
