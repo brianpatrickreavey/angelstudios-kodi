@@ -1,0 +1,35 @@
+{
+  "props": {
+    "pageProps": {
+      "projectData": {
+        "seasons": [
+          {
+            "name": "Season 1",
+            "seasonNumber": 1,
+            "poster": "poster1.jpg",
+            "description": "First season",
+            "episodes": [
+              {
+                "name": "Episode 1",
+                "subtitle": "Pilot",
+                "description": "The first episode.",
+                "url": "http://example.com/ep1",
+                "thumbnail": "thumb1.jpg",
+                "episodeNumber": 1,
+                "source": {
+                  "__typename": "EpisodeSource",
+                  "credits": 1198,
+                  "duration": 1266,
+                  "url": "https://fakeurl.com/episode1/source"
+                },
+                "posterCloudinaryPath": "mock_episode_poster1",
+                "posterLandscapeCloudinaryPath": "mock_episode_poster1"
+              }
+            ]
+          }
+        ],
+        "discoveryPosterLandscapeCloudinaryPath": "mock_poster"
+      }
+    }
+  }
+}

@@ -175,7 +175,7 @@ def get_seasons(project_url):
         
         season = {
             'name': raw_season['name'],
-            'season_number': raw_season['episodes'][0]['seasonNumber'],
+            'season_number': raw_season['seasonNumber'],
             'poster': f"https://images.angelstudios.com/image/upload/f_auto/q_auto/{show_data['props']['pageProps']['projectData']['discoveryPosterLandscapeCloudinaryPath']}.jpg",
             # 'description': project_description,
             'episodes': None
