@@ -13,14 +13,14 @@
                 "name": "Episode 1",
                 "subtitle": "Pilot",
                 "description": "The first episode.",
-                "url": "http://example.com/ep1",
+                "url": "http://fake.url/ep1",
                 "thumbnail": "mock_thumbnail.jpg",
                 "episodeNumber": 1,
                 "source": {
                   "__typename": "EpisodeSource",
                   "credits": 1,
                   "duration": 1,
-                  "url": "https://fakeurl.com/episode1/source"
+                  "url": "https://fake.url/episode1/source"
                 },
                 "posterCloudinaryPath": "mock_episode_poster1",
                 "posterLandscapeCloudinaryPath": "mock_episode_poster1"
