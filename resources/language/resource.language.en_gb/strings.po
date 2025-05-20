@@ -1,0 +1,11 @@
+msgid ""
+msgstr ""
+"Language: en_GB\n"
+
+msgctxt "#32011"
+msgid "Username"
+msgstr "Username"
+
+msgctxt "#32012"
+msgid "Password"
+msgstr "Password"
