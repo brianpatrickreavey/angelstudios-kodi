@@ -5,7 +5,6 @@
         "seasons": [
           {
             "name": "Season 1",
-            "seasonNumber": 1,
             "poster": "poster1.jpg",
             "description": "First season",
             "episodes": [
@@ -16,6 +15,7 @@
                 "url": "http://fake.url/ep1",
                 "thumbnail": "mock_thumbnail.jpg",
                 "episodeNumber": 1,
+                "seasonNumber": 1,
                 "source": {
                   "__typename": "EpisodeSource",
                   "credits": 1,

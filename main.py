@@ -166,6 +166,9 @@ def get_seasons(project_url):
     response = requests.get(project_url)
     soup = bs4.BeautifulSoup(response.content, 'html.parser')
     show_data = json.loads(soup.find(id="__NEXT_DATA__").string)
+    # write out the json data to a file
+    with open('tests/data/mock_seasons.json', 'w') as f:
+        json.dump(show_data, f, indent=2)
     seasons = []
     for raw_season in show_data['props']['pageProps']['projectData']['seasons']:
         # if show_data['props']['pageProps']['catalogTitle'] == None:
@@ -175,7 +178,7 @@ def get_seasons(project_url):
         
         season = {
             'name': raw_season['name'],
-            'season_number': raw_season['seasonNumber'],
+            'season_number': raw_season['episodes'][0]['seasonNumber'],
             'poster': f"https://images.angelstudios.com/image/upload/f_auto/q_auto/{show_data['props']['pageProps']['projectData']['discoveryPosterLandscapeCloudinaryPath']}.jpg",
             # 'description': project_description,
             'episodes': None
