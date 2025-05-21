@@ -6,43 +6,18 @@ on:
       - main
 
 jobs:
-  build-and-upload:
+  trigger_build:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    # Don't to anything yet.  This is a placeholder for the build job.
 
-      - name: Get version
-        id: get_version
-        run: echo "VERSION=$(cat version.txt)" >> $GITHUB_ENV
-
-      - name: Checkout KODI Repo Generator
-        uses: actions/checkout@v4
-        with:
-          repository: chadparry/kodi-repository.chad.parry.org
-          ref: master
-          path: kodi-repository
-
-      - name: Copy needed file
-        run: cp kodi-repository/tools/create_repository.py ./
-
-      # TODO This would be better to pull from deployment artifacts
-      - name: Checkout gh-pages branch into gh-pages directory
-        run: |
-          git fetch origin gh-pages:gh-pages || true
-          rm -rf gh-pages
-          git clone --branch gh-pages --single-branch --depth 1 "https://github.com/${GITHUB_REPOSITORY}.git" gh-pages || mkdir gh-pages
-
-      - name: Run the packager
-        run: |
-          /bin/bash build.sh
-          # build.sh should create gh-pages/plugin.video.angelstudios-${VERSION}.zip
-
-      - name: Publish to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./gh-pages
-          publish_branch: gh-pages
-          keep_files: true
+    # steps:
+    #   - name: Trigger build on repository.kodi.reavey05.com
+    #     env:
+    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     run: |
+    #       curl -X POST \
+    #         -H "Accept: application/vnd.github+json" \
+    #         -H "Authorization: Bearer $GITHUB_TOKEN" \
+    #         https://api.github.com/repos/brianpatrickreavey/repository.kodi.reavey05.com/dispatches \
+    #         -d '{"event_type":"trigger-build","client_payload":{"branch":"${GITHUB_REF_NAME}"}}'

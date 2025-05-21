@@ -149,7 +149,7 @@ def get_projects(main_url):
         if project_guid in angeldata['props']['pageProps']['pageDataContext']['title-map']:
             project_description = angeldata['props']['pageProps']['pageDataContext']['title-map'][project_guid]['description']['long']
         else:
-            xbmc.log(f"guid not found for {project_name}", xbmc.LOGINFO)
+            xbmc.log(f"guid not found for {project_name}", xbmc.LOGDEBUG)
         print(f"{project_name} - {project_url}")
         projects[project_slug] = {
                 'name': project_name,
@@ -160,6 +160,13 @@ def get_projects(main_url):
                 'icon': f"https://images.angelstudios.com/image/upload/f_auto/q_auto/{project_data['metadata']['project']['logoCloudinaryPath']}.jpg",
                 'logo': f"https://images.angelstudios.com/image/upload/f_auto/q_auto/{project_data['metadata']['project']['logoCloudinaryPath']}.jpg"
             }
+
+    # sort projects by slug:
+    project_slugs = list(projects.keys())
+    project_slugs.sort()
+    for project_slug in project_slugs:
+        xbmc.log(f"project: {project_slug}, name: {projects[project_slug]['name'], }", xbmc.LOGINFO)
+        
     return projects
 
 def get_seasons(project_url):
