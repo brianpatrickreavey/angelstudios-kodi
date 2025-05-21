@@ -179,3 +179,5 @@ gh-pages
 repo/zips
 temp
 addon_development.xml
+credentials.json
+.vscode

@@ -17,7 +17,10 @@ Example video plugin that is compatible with Kodi 20.x "Nexus" and above
 """
 import os
 import sys
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'lib'))
+
 from urllib.parse import urlencode, parse_qsl
+import hashlib
 
 import xbmc # type: ignore
 import xbmcgui # type: ignore
@@ -29,6 +32,8 @@ import requests
 import bs4
 import json
 
+import authenticate
+
 # Get the plugin url in plugin:// notation.
 URL = sys.argv[0]
 # Get a plugin handle as an integer number.
@@ -39,10 +44,19 @@ ICONS_DIR = os.path.join(ADDON_PATH, 'resources', 'images', 'icons')
 FANART_DIR = os.path.join(ADDON_PATH, 'resources', 'images', 'fanart')
 POSTER_DIR = os.path.join(ADDON_PATH, 'resources', 'images', 'posters')
 
-# url="https://www.angel.com/watch/tuttle-twins/"
-# response = requests.get(url)
-# soup = bs4.BeautifulSoup(response.content, 'html.parser')
-# raw_data = json.loads(soup.find(id="__NEXT_DATA__").string)
+# Get the addon settings
+angel_username = Addon().getSetting('username')
+angel_password = Addon().getSetting('password')
+
+# Hash the password with SHA-256
+hashed_password = hashlib.sha256(angel_password.encode('utf-8')).hexdigest()
+xbmc.log(f"username: {angel_username}, hashed_password: {hashed_password}", xbmc.LOGINFO)
+
+session = authenticate.get_authenticated_session(
+    username=angel_username,
+    password=angel_password,
+)
+
 
 
 'We need: Login, and Whole Site'
@@ -120,7 +134,7 @@ def get_url(**kwargs):
 
 
 def get_projects(main_url):
-    response = requests.get(main_url)
+    response = session.get(main_url)  # changed from requests.get
     soup = bs4.BeautifulSoup(response.content, 'html.parser')
     angeldata = json.loads(soup.find(id="__NEXT_DATA__").string)
 
@@ -170,7 +184,7 @@ def get_projects(main_url):
     return projects
 
 def get_seasons(project_url):
-    response = requests.get(project_url)
+    response = session.get(project_url)  # changed from requests.get
     soup = bs4.BeautifulSoup(response.content, 'html.parser')
     show_data = json.loads(soup.find(id="__NEXT_DATA__").string)
 

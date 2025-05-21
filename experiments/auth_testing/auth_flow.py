@@ -10,14 +10,16 @@ import logging
 logger = logging.getLogger(__name__)
 
 # Choose a logging level: logging.[INFO, DEBUG]
-loglevel = logging.INFO
+loglevel = logging.DEBUG
 logging.basicConfig(level=loglevel)
 
 # username = xbmcplugin.getSetting('username')
 # password = xbmcplugin.getSetting('password')
 
-username = "brian@reavey05.com"
-password = "REDACTED"
+with open('credentials.json') as f:
+    credentials = json.load(f)
+    username = credentials['username']
+    password = credentials['password']
 
 login_session = requests.session()
 auth_domain = ''
@@ -82,17 +84,46 @@ post_url = f"https://auth.angel.com/u/login?{encoded2}"
 
 logger.debug(f"{post_url=}")
 
-response2 = login_session.post(post_url, data=data2)
-if response2.status_code == 200:
-    logger.info("Successfully logged into Angel Studios!")
+response2 = login_session.post(post_url, data=data2, allow_redirects=False)
+if response2.status_code in [302, 303]:
+    redirect_url = response2.headers.get('Location')
+    logger.info(f"Following redirect to: {redirect_url}")
+    response3 = login_session.get(redirect_url, allow_redirects=True)
+    logger.debug(f"{response3.status_code=}")
+    logger.debug(f"{response3.url=}")
+    logger.debug(f"{response3.headers=}")
+elif response2.status_code == 200:
+    logger.info("Login step completed with 200 OK.")
+else:
+    logger.error(f"Login failed: {response2.status_code} {response2.reason}")
+
+html_for_soup = response3.content
+soup3 = BeautifulSoup(html_for_soup, "html.parser")
+raw_data = soup3.find(id="__NEXT_DATA__").string
+with open('raw_data.json', 'w') as f:
+    json.dump(json.loads(raw_data), f, indent=2)
 
 
-logger.debug(f"{response2.content=}")
-logger.debug(f"{response2.text=}")
-logger.debug(f"{response2.status_code=}")
-logger.debug(f"{response2.reason=}")
-logger.debug(f"{response2.url=}")
-logger.debug(f"{response2.headers=}")
-logger.debug(f"{response2.cookies=}")
+tuttle_twins_url = 'https://www.angel.com/watch/tuttle-twins'
+response4 = login_session.get(tuttle_twins_url)
+if response4.status_code == 200:
+    logger.info("Successfully fetched the Tuttle Twins page.")
+    logger.debug(f"{response4.status_code=}")
+else:
+    logger.error(f"{response4.status_code=}")
+    raise
+soup4 = BeautifulSoup(response4.content, "html.parser")
+show_data = json.loads(soup4.find(id="__NEXT_DATA__").string)
+with open('project_tuttle_twins.json', 'w') as f:
+    json.dump(show_data, f, indent=2)
+    
+
+# logger.debug(f"{response2.content=}")
+# logger.debug(f"{response2.text=}")
+# logger.debug(f"{response2.status_code=}")
+# logger.debug(f"{response2.reason=}")
+# logger.debug(f"{response2.url=}")
+# logger.debug(f"{response2.headers=}")
+# logger.debug(f"{response2.cookies=}")
 
 
